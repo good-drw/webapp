@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+	<meta name="format-detection" content="telephone=no,email=no"/>
+	<title>webApp</title>
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+
+</head>
+<body>
+	<section class="main" id="main">
+		<!-- HEADER -->
+		<header class="header">
+			<div class="con">
+				<h1 class="logo">腾讯体育</h1>
+				<span class="type">NBA</span>
+				<span class="menu"></span>
+				<span class="login">登陆</span>
+			</div>
+			<nav class="nav">
+				<a href="#">NBA</a>
+				<a href="#">CBA</a>
+				<a href="#">英超</a>
+				<a href="#">欧冠</a>
+				<a href="#">亚冠</a>
+				<a href="#">西甲</a>
+				<a href="#">德甲</a>
+				<a href="#">意甲</a>
+				<a href="#">法甲</a>
+				<a href="#">中超</a>
+				<a href="#">NFL</a>
+				<a href="#">综合</a>
+				<a href="#">欧洲</a>
+				<a href="#">社区</a>
+				<a href="#">下载</a>
+			</nav>
+		</header>
+
+		<!-- VIDEO -->
+		<section class="videoArea">
+		<!-- 只有preload="none"的时候poster才会起作用 -->
+			<video controls preload="none" poster="img/poster.jpg" src="http://61.128.150.174/sports.tc.qq.com/p0022ocwbz0.mp4?vkey=2FB4BE8766E621D3CBA689F95E8B36355006F51C77D598A2EE1EC2458739F5A7045E77C0EC9C64627DF0DC11E04C26DFC178CC7480BEFCF72DCCD15215942D682616CB5B66DAC5022BA630C829310872B16470FF5579464F&br=59&platform=2&fmt=auto&level=0&sdtfrom=v3010&guid=5787c64542ae408e6dc43f82237f34ea"></video>
+		</section>
+
+		<!-- METCH INFO -->
+		<section class="matchInfo">
+		</section>
+
+		<!-- MATCH LIST -->
+		<section class="matchList">
+			<ul class="clear">
+			</ul>
+		</section>
+
+		<h3 class="title">回放</h3>
+		<!-- REPLY LIST -->
+		<section class="replyList">
+			<ul class="clear">
+			</ul>
+		</section>
+
+		<h3 class="title">相关新闻<span> > </span></h3>
+		<!-- NEWS -->
+		<section class="newsList">
+			<ul>
+
+			</ul>
+		</section>
+	</section>
+
+
+	<script src="js/zepto.min.js"></script>
+	<script src="js/iscroll-5.1.3.min.js"></script>
+	<script src="js/ejs.min.js"></script>
+	<script src="js/lazy.min.js"></script>
+	<script type="text/template" id="matchInfoTemplate">
+		<div class="top">
+			<div class="home">
+				<img src="<%=matchInfo.leftBadge%>" >
+				<span><%=matchInfo.leftGoal%></span>
+			</div>
+			<div class="time"><%=matchInfo.startTime.formatTime('{1}月{2}日 {3}:{4}')%></div>
+			<div class="away">
+				<span><%=matchInfo.rightGoal%></span>
+				<img src="<%=matchInfo.rightBadge%>">
+			</div>
+		</div>
+		<div class="middle">
+			<span></span>
+		</div>
+		<div class="bottom">
+			<span class="home" type="1"><%=matchInfo.leftSupport%></span>
+			<span class="type"><%=matchInfo.matchDesc%></span>
+			<span class="away" type="2"><%=matchInfo.rightSupport%></span>
+		</div>
+	</script>
+	<script type="text/template" id="matchListTemplate">
+		<%$.each(matchList, function(index, item) {%>
+			<li class="<%=index===0?'bg':''%>">
+				<div>
+					<img src="img/default.gif" data-echo="<%=item.pic%>">
+					<span><%=item.duration.substring(item.duration.indexOf(':')+1)%></span>
+				</div>
+				<p><%=item.title%></p>
+			</li>
+		<%})%>
+	</script>
+	<script type="text/template" id="replyListTemplate">
+		<%$.each(replyList, function (index, item) {%>
+			<li>
+				<div>
+					<img src="img/default.gif" data-echo="<%=item.pic%>">
+					<span></span>
+					<span><%=item.tag.substring(0,2)%></span>
+					<span><%=item.duration.substring(item.duration.indexOf(":")+1)%></span>
+				</div>
+				<p><%=item.title%></p>
+			</li>
+		<% }) %>
+	</script>
+	<script type="text/template" id="newsListTemplate">
+		<%$.each(newsList, function (index, item) {%>
+			<li>
+				<a href="#">
+					<img src="img/default.gif" data-echo="<%=item.imgurl2%>">
+					<span></span>
+					<h4 class="newsTitle"><%=item.title%></h4>
+					<p class="content"><%=item.abstract%></p>
+					<span>
+						<i></i>
+						<%=item.commentsNum%>
+					</span>
+				</a>
+			</li>
+		<% }) %>
+	</script>
+	<script src="js/index.js"></script>
+</body>
+</html>
